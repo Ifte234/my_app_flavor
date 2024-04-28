@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "314205119058",
+    "project_id": "my-app-flavor-staging",
+    "storage_bucket": "my-app-flavor-staging.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314205119058:android:68121f8a01efbeee46f58b",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.my_app.stg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgy_a1IvjIQAJWluHZ-w1wH_-cIaOGyKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

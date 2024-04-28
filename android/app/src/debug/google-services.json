@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "247101473745",
+    "project_id": "my-app-flavor-production",
+    "storage_bucket": "my-app-flavor-production.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247101473745:android:b0cf1497a961c51baad6f0",
+        "android_client_info": {
+          "package_name": "com.example.verygoodcore.my_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyaezDKN7IIwGWNoZeRYuCaSZSnuPjz9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
