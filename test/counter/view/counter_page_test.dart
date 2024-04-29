@@ -31,7 +31,7 @@ void main() {
       await tester.pumpApp(
         BlocProvider.value(
           value: counterCubit,
-          child: const CounterView(),
+          child:  CounterView(),
         ),
       );
       expect(find.text('$state'), findsOneWidget);
@@ -44,7 +44,7 @@ void main() {
       await tester.pumpApp(
         BlocProvider.value(
           value: counterCubit,
-          child: const CounterView(),
+          child:  CounterView(),
         ),
       );
       await tester.tap(find.byIcon(Icons.add));
@@ -58,7 +58,7 @@ void main() {
       await tester.pumpApp(
         BlocProvider.value(
           value: counterCubit,
-          child: const CounterView(),
+          child: CounterView(),
         ),
       );
       await tester.tap(find.byIcon(Icons.remove));

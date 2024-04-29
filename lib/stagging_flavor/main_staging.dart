@@ -4,7 +4,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:my_app/app/app.dart';
-import 'package:my_app/bootstrap.dart';
 
 
 void main() async{
@@ -24,16 +23,4 @@ void main() async{
     runApp(App());
   }, (error, stack) =>
       FirebaseCrashlytics.instance.recordError(error, stack, fatal: true));
-
-
-
-
-
-
-
-
-  //
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-  // bootstrap(() => const App());
 }

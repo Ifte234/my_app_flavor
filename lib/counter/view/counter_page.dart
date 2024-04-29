@@ -1,10 +1,8 @@
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/counter/counter.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
-
 class CounterPage extends StatefulWidget {
   const CounterPage({super.key});
 
@@ -13,65 +11,70 @@ class CounterPage extends StatefulWidget {
 }
 
 class _CounterPageState extends State<CounterPage> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      final remoteConfig = await FirebaseRemoteConfig.instance;
-      final defaultValue=<String,dynamic>{
-        'author':'developer',
-        "channel":"developer"
-      };
-      try {
-        await remoteConfig.setConfigSettings(RemoteConfigSettings(
-          fetchTimeout: const Duration(hours: 4), //cache refresh time
-          minimumFetchInterval: Duration.zero,
-        ));
-        await remoteConfig.fetchAndActivate();
 
-      } on PlatformException catch (exception) {
-// Fetch exception.
-        print(exception);
-      } catch (exception) {
-        print('Unable to fetch remote config. Cached or default values will be '
-            'used');
-        print("exception===>$exception");
-      }
-      setState(() {
-
-       var author = remoteConfig.getString("author");
-       print(author);
-        remoteConfig.getString("channel");
-
-      });
-    });
-  }
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => CounterCubit(),
-      child: const CounterView(),
+      child:  CounterView(),
     );
   }
 }
 
-class CounterView extends StatelessWidget {
-  const CounterView({super.key});
+class CounterView extends StatefulWidget {
+   CounterView({Key ,key});
+
+  @override
+  State<CounterView> createState() => _CounterViewState();
+}
+
+class _CounterViewState extends State<CounterView> {
+  var showbanner = false;
+
+  var bannerText='';
+
+  @override
+  void initState() {
+    super.initState();
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    remoteConfig.onConfigUpdated.listen((event) async {
+      await remoteConfig.activate();
+      setState(() {
+        showbanner= remoteConfig.getBool('showbanner');
+        bannerText= remoteConfig.getString('bannerText');
+
+      });
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
 
+
     return Scaffold(
-      appBar: AppBar(title: Text('${appFlavor} Flavor App ')),
-      body: const Center(child: CounterText()),
-      floatingActionButton: Column(
+      appBar: AppBar(title: Text('Flavor App ')),
+      body:  Center(child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          OutlinedButton(
-            onPressed: () => throw Exception(),
-            child: const Text("Throw Test Exception"),
+
+          Card(
+            child: Text(bannerText),
           ),
+          OutlinedButton(
+
+      onPressed: () {  throw Exception(); },
+      child: const Text("Throw Test Exception"),),
+
+          CounterText(),
+        ],
+      )),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+
           FloatingActionButton(
             onPressed: () => context.read<CounterCubit>().increment(),
             child: const Icon(Icons.add),
