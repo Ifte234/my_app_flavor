@@ -3,14 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_app/counter/counter.dart';
-class CounterPage extends StatefulWidget {
+class CounterPage extends StatelessWidget {
   const CounterPage({super.key});
-
-  @override
-  State<CounterPage> createState() => _CounterPageState();
-}
-
-class _CounterPageState extends State<CounterPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +53,11 @@ class _CounterViewState extends State<CounterView> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
 
-          Card(
-            child: Text(bannerText),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              child: Text(bannerText),
+            ),
           ),
           OutlinedButton(
 
